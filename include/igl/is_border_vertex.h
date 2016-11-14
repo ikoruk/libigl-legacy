@@ -29,6 +29,12 @@ namespace igl
   IGL_INLINE std::vector<bool> is_border_vertex(
    const Eigen::PlainObjectBase<DerivedV> &V,
    const Eigen::PlainObjectBase<DerivedF> &F);
+  
+  template <typename DerivedV, typename DerivedF, typename DerivedVMAP>
+  IGL_INLINE void is_border_vertex(
+        const Eigen::PlainObjectBase<DerivedV> &V,
+        const Eigen::PlainObjectBase<DerivedF> &F,
+        Eigen::PlainObjectBase<DerivedVMAP> &Vmap);
 }
 
 #ifndef IGL_STATIC_LIBRARY

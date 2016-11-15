@@ -11,11 +11,11 @@
 #include <vector>
 #include <unsupported/Eigen/SparseExtra>
 
-template <typename TX, typename TY>
+template <typename TX, typename TY, typename DerivedR>
 IGL_INLINE void igl::slice(
   const Eigen::SparseMatrix<TX>& X,
-  const Eigen::Matrix<int,Eigen::Dynamic,1> & R,
-  const Eigen::Matrix<int,Eigen::Dynamic,1> & C,
+  const DerivedR & R,
+  const DerivedR & C,
   Eigen::SparseMatrix<TY>& Y)
 {
 #if 1
@@ -211,10 +211,10 @@ IGL_INLINE void igl::slice(
 }
 
 
-template <typename DerivedX, typename DerivedY>
+template <typename DerivedX, typename DerivedY, typename DerivedR>
 IGL_INLINE void igl::slice(
   const Eigen::PlainObjectBase<DerivedX> & X,
-  const Eigen::Matrix<int,Eigen::Dynamic,1> & R,
+  const Eigen::PlainObjectBase<DerivedR> & R,
   Eigen::PlainObjectBase<DerivedY> & Y)
 {
   // phony column indices
@@ -224,20 +224,20 @@ IGL_INLINE void igl::slice(
   return igl::slice(X,R,C,Y);
 }
 
-template <typename DerivedX>
+template <typename DerivedX, typename DerivedR>
 IGL_INLINE DerivedX igl::slice(
   const Eigen::PlainObjectBase<DerivedX> & X,
-  const Eigen::Matrix<int,Eigen::Dynamic,1> & R)
+  const Eigen::PlainObjectBase<DerivedR> & R)
 {
   DerivedX Y;
   igl::slice(X,R,Y);
   return Y;
 }
 
-template <typename DerivedX>
+template <typename DerivedX, typename DerivedR>
 IGL_INLINE DerivedX igl::slice(
-  const Eigen::PlainObjectBase<DerivedX>& X,
-  const Eigen::Matrix<int,Eigen::Dynamic,1> & R,
+  const Eigen::PlainObjectBase<DerivedX> & X,
+  const Eigen::PlainObjectBase<DerivedR> & R,
   const int dim)
 {
   DerivedX Y;

@@ -81,13 +81,14 @@ IGL_INLINE void igl::upsample(
   S.setFromTriplets(tripletList.begin(), tripletList.end());
 
   // Build the new topology (Every face is replaced by four)
+  typedef Matrix<typename DerivedNF::Scalar, Eigen::Dynamic, 1> RowVectorNF;
   NF.resize(F.rows()*4,3);
   for(int i=0; i<F.rows();++i)
   {
-    VectorXi VI(6);
+    RowVectorNF VI(6);
     VI << F(i,0), F(i,1), F(i,2), NI(i,0) + n_odd, NI(i,1) + n_odd, NI(i,2) + n_odd;
 
-    VectorXi f0(3), f1(3), f2(3), f3(3);
+    RowVectorNF f0(3), f1(3), f2(3), f3(3);
     f0 << VI(0), VI(3), VI(5);
     f1 << VI(1), VI(4), VI(3);
     f2 << VI(3), VI(4), VI(5);

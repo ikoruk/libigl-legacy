@@ -36,9 +36,9 @@ namespace igl
   //
   template <typename DerivedV, typename DerivedF, typename DerivedL>
   IGL_INLINE void edge_lengths(
-    const Eigen::PlainObjectBase<DerivedV>& V,
-    const Eigen::PlainObjectBase<DerivedF>& F,
-    Eigen::PlainObjectBase<DerivedL>& L);
+    const Eigen::MatrixBase<DerivedV>& V,
+    const Eigen::MatrixBase<DerivedF>& F,
+    DerivedL& L);
 }
 
 #ifndef IGL_STATIC_LIBRARY

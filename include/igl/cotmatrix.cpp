@@ -15,11 +15,11 @@
 // Bug in unsupported/Eigen/SparseExtra needs iostream first
 #include <iostream>
 
-template <typename DerivedV, typename DerivedF, typename Scalar>
+template <typename DerivedV, typename DerivedF, typename SparseDerivedL>
 IGL_INLINE void igl::cotmatrix(
   const Eigen::MatrixBase<DerivedV> & V,
   const Eigen::MatrixBase<DerivedF> & F,
-  Eigen::SparseMatrix<Scalar>& L)
+  SparseDerivedL& L)
 {
   using namespace Eigen;
   using namespace std;
@@ -56,6 +56,7 @@ IGL_INLINE void igl::cotmatrix(
     return;
   }
   // Gather cotangents
+  typedef typename SparseDerivedL::Scalar Scalar;
   Matrix<Scalar,Dynamic,Dynamic> C;
   cotmatrix_entries(V,F,C);
   

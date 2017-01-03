@@ -121,7 +121,7 @@ IGL_INLINE void igl::point_simplex_squared_distance(
     ) && "bary must be Dynamic or size of Ele.cols()");
 
   BaryPoint tmp_bary;
-  c = ClosestBaryPtPointTriangle(
+  c = (const Derivedc &)ClosestBaryPtPointTriangle(
     p,
     V.row(Ele(primitive,0)),
     // modulo is a HACK to handle points, segments and triangles. Because of

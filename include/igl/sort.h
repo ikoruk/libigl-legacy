@@ -32,7 +32,7 @@ namespace igl
   //     for j = 1:n, Y(:,j) = X(I(:,j),j); end
   template <typename DerivedX, typename DerivedY, typename DerivedIX>
   IGL_INLINE void sort(
-    const Eigen::MatrixBase<DerivedX>& X,
+    const Eigen::DenseBase<DerivedX>& X,
     const int dim,
     const bool ascending,
     DerivedY& Y,
@@ -40,7 +40,7 @@ namespace igl
   template <typename DerivedX, typename DerivedY, typename DerivedIX>
   // Only better if size(X,dim) is small
   IGL_INLINE void sort_new(
-    const Eigen::MatrixBase<DerivedX>& X,
+    const Eigen::DenseBase<DerivedX>& X,
     const int dim,
     const bool ascending,
     DerivedY& Y,
@@ -48,7 +48,7 @@ namespace igl
   // Special case if size(X,dim) == 2
   template <typename DerivedX, typename DerivedY, typename DerivedIX>
   IGL_INLINE void sort2(
-    const Eigen::MatrixBase<DerivedX>& X,
+    const Eigen::DenseBase<DerivedX>& X,
     const int dim,
     const bool ascending,
     DerivedY& Y,
@@ -56,7 +56,7 @@ namespace igl
   // Special case if size(X,dim) == 3
   template <typename DerivedX, typename DerivedY, typename DerivedIX>
   IGL_INLINE void sort3(
-    const Eigen::MatrixBase<DerivedX>& X,
+    const Eigen::DenseBase<DerivedX>& X,
     const int dim,
     const bool ascending,
     DerivedY& Y,

@@ -27,13 +27,13 @@ namespace igl
   
   template <typename DerivedX,typename DerivedY>
   IGL_INLINE void slice_mask(
-    const Eigen::MatrixBase<DerivedX> & X,
+    const Eigen::DenseBase<DerivedX> & X,
     const Eigen::Array<bool,Eigen::Dynamic,1> & R,
     const Eigen::Array<bool,Eigen::Dynamic,1> & C,
     Eigen::PlainObjectBase<DerivedY> & Y);
   template <typename DerivedX,typename DerivedY>
   IGL_INLINE void slice_mask(
-    const Eigen::MatrixBase<DerivedX> & X,
+    const Eigen::DenseBase<DerivedX> & X,
     const Eigen::Array<bool,Eigen::Dynamic,1> & R,
     const int dim,
     Eigen::PlainObjectBase<DerivedY> & Y);
@@ -44,14 +44,26 @@ namespace igl
   // the number of rows in `DerivedX`.
   template <typename DerivedX>
   IGL_INLINE DerivedX slice_mask(
-    const Eigen::MatrixBase<DerivedX> & X,
+    const Eigen::DenseBase<DerivedX> & X,
     const Eigen::Array<bool,Eigen::Dynamic,1> & R,
     const Eigen::Array<bool,Eigen::Dynamic,1> & C);
   template <typename DerivedX>
   IGL_INLINE DerivedX slice_mask(
-    const Eigen::MatrixBase<DerivedX> & X,
+    const Eigen::DenseBase<DerivedX> & X,
     const Eigen::Array<bool,Eigen::Dynamic,1> & R,
     const int dim);
+  template <typename XType, typename YType>
+  IGL_INLINE void slice_mask(
+    const Eigen::SparseMatrix<XType> & X,
+    const Eigen::Array<bool,Eigen::Dynamic,1> & R,
+    const int dim,
+    Eigen::SparseMatrix<YType> & Y);
+  template <typename XType, typename YType>
+  IGL_INLINE void slice_mask(
+    const Eigen::SparseMatrix<XType> & X,
+    const Eigen::Array<bool,Eigen::Dynamic,1> & R,
+    const Eigen::Array<bool,Eigen::Dynamic,1> & C,
+    Eigen::SparseMatrix<YType> & Y);
 }
 
 

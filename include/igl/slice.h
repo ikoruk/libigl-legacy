@@ -25,12 +25,11 @@ namespace igl
   // See also: slice_mask
   template <
     typename TX, 
-    typename TY,
-    typename DerivedR>
+    typename TY>
   IGL_INLINE void slice(
     const Eigen::SparseMatrix<TX>& X,
-    const DerivedR & R,
-    const DerivedR & C,
+    const Eigen::Matrix<int,Eigen::Dynamic,1> & R,
+    const Eigen::Matrix<int,Eigen::Dynamic,1> & C,
     Eigen::SparseMatrix<TY>& Y);
   // Wrapper to only slice in one direction
   //
@@ -44,7 +43,7 @@ namespace igl
     typename MatY>
   IGL_INLINE void slice(
     const MatX& X,
-    const Eigen::PlainObjectBase<DerivedR> & R,
+    const Eigen::DenseBase<DerivedR> & R,
     const int dim,
     MatY& Y);
   template <
@@ -53,15 +52,15 @@ namespace igl
     typename DerivedC, 
     typename DerivedY>
   IGL_INLINE void slice(
-    const Eigen::PlainObjectBase<DerivedX> & X,
-    const Eigen::PlainObjectBase<DerivedR> & R,
-    const Eigen::PlainObjectBase<DerivedC> & C,
+    const Eigen::DenseBase<DerivedX> & X,
+    const Eigen::DenseBase<DerivedR> & R,
+    const Eigen::DenseBase<DerivedC> & C,
     Eigen::PlainObjectBase<DerivedY> & Y);
 
-  template <typename DerivedX, typename DerivedY, typename DerivedR>
+  template <typename DerivedX, typename DerivedY>
   IGL_INLINE void slice(
-    const Eigen::PlainObjectBase<DerivedX> & X,
-    const Eigen::PlainObjectBase<DerivedR> & R,
+    const Eigen::DenseBase<DerivedX> & X,
+    const Eigen::Matrix<int,Eigen::Dynamic,1> & R,
     Eigen::PlainObjectBase<DerivedY> & Y);
   // VectorXi Y = slice(X,R);
   //
@@ -69,14 +68,14 @@ namespace igl
   // size as `DerivedX`. This will probably only work if DerivedX has Dynamic
   // as it's non-trivial sizes or if the number of rows in R happens to equal
   // the number of rows in `DerivedX`.
-  template <typename DerivedX, typename DerivedR>
+  template <typename DerivedX>
   IGL_INLINE DerivedX slice(
-    const Eigen::PlainObjectBase<DerivedX> & X,
-    const Eigen::PlainObjectBase<DerivedR> & R);
-  template <typename DerivedX, typename DerivedR>
+    const Eigen::DenseBase<DerivedX> & X,
+    const Eigen::Matrix<int,Eigen::Dynamic,1> & R);
+  template <typename DerivedX>
   IGL_INLINE DerivedX slice(
-    const Eigen::PlainObjectBase<DerivedX> & X,
-    const Eigen::PlainObjectBase<DerivedR> & R,
+    const Eigen::DenseBase<DerivedX>& X,
+    const Eigen::Matrix<int,Eigen::Dynamic,1> & R,
     const int dim);
 
 }

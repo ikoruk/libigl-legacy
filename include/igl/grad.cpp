@@ -13,11 +13,11 @@
 #include "volume.h"
 #include "doublearea.h"
 
-template <typename DerivedV, typename DerivedF>
+template <typename DerivedV, typename DerivedF, typename SparseDerivedG>
 IGL_INLINE void grad_tet(const Eigen::PlainObjectBase<DerivedV>&V,
-                     const Eigen::PlainObjectBase<DerivedF>&T,
-                            Eigen::SparseMatrix<typename DerivedV::Scalar> &G,
-                            bool uniform) {
+                         const Eigen::PlainObjectBase<DerivedF>&T,
+                         SparseDerivedG &G,
+                         bool uniform) {
   using namespace Eigen;
   assert(T.cols() == 4);
   const int n = V.rows(); int m = T.rows();
@@ -113,11 +113,11 @@ IGL_INLINE void grad_tet(const Eigen::PlainObjectBase<DerivedV>&V,
   G.setFromTriplets(G_t.begin(), G_t.end());
 }
 
-template <typename DerivedV, typename DerivedF>
+template <typename DerivedV, typename DerivedF, typename SparseDerivedG>
 IGL_INLINE void grad_tri(const Eigen::PlainObjectBase<DerivedV>&V,
-                     const Eigen::PlainObjectBase<DerivedF>&F,
-                    Eigen::SparseMatrix<typename DerivedV::Scalar> &G,
-                    bool uniform)
+                         const Eigen::PlainObjectBase<DerivedF>&F,
+                         SparseDerivedG &G,
+                         bool uniform)
 {
   Eigen::Matrix<typename DerivedV::Scalar,Eigen::Dynamic,3>
     eperp21(F.rows(),3), eperp13(F.rows(),3);
@@ -221,11 +221,11 @@ IGL_INLINE void grad_tri(const Eigen::PlainObjectBase<DerivedV>&V,
   G.setFromTriplets(triplets.begin(), triplets.end());
 }
 
-template <typename DerivedV, typename DerivedF>
+template <typename DerivedV, typename DerivedF, typename SparseDerivedG>
 IGL_INLINE void igl::grad(const Eigen::PlainObjectBase<DerivedV>&V,
-                     const Eigen::PlainObjectBase<DerivedF>&F,
-                    Eigen::SparseMatrix<typename DerivedV::Scalar> &G,
-                    bool uniform)
+                          const Eigen::PlainObjectBase<DerivedF>&F,
+                          SparseDerivedG &G,
+                          bool uniform)
 {
   assert(F.cols() == 3 || F.cols() == 4);
   if (F.cols() == 3)

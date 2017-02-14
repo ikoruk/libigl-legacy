@@ -12,7 +12,7 @@ IGL_INLINE void igl::repmat(
   const Eigen::MatrixBase<DerivedA> & A,
   const int r,
   const int c,
-  Eigen::PlainObjectBase<DerivedB> & B)
+  Eigen::MatrixBase<DerivedB> & B)
 {
   assert(r>0);
   assert(c>0);
@@ -29,12 +29,12 @@ IGL_INLINE void igl::repmat(
   }
 }
 
-template <typename T>
+template <typename T, typename SparseDerivedT>
 IGL_INLINE void igl::repmat(
   const Eigen::SparseMatrix<T> & A,
   const int r,
   const int c,
-  Eigen::SparseMatrix<T> & B)
+  Eigen::SparseMatrixBase<SparseDerivedT> & B)
 {
   assert(r>0);
   assert(c>0);

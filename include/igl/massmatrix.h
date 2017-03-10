@@ -32,7 +32,8 @@ namespace igl
   //     MatrixXd)
   //   DerivedF  derived type of eigen matrix for F (e.g. derived from
   //     MatrixXi)
-  //   Scalar  scalar type for eigen sparse matrix (e.g. double)
+  //   SparseDerivedM  derived type for eigen sparse matrix (e.g. derived
+  //     from SparseMatrixd)
   // Inputs:
   //   V  #V by dim list of mesh vertex positions
   //   F  #F by simplex_size list of mesh faces (must be triangles)
@@ -45,12 +46,12 @@ namespace igl
   //
   // See also: adjacency_matrix
   //
-  template <typename DerivedV, typename DerivedF, typename Scalar>
+  template <typename DerivedV, typename DerivedF, typename SparseDerivedM>
   IGL_INLINE void massmatrix(
     const Eigen::MatrixBase<DerivedV> & V, 
     const Eigen::MatrixBase<DerivedF> & F, 
     const MassMatrixType type,
-    Eigen::SparseMatrix<Scalar>& M);
+    SparseDerivedM& M);
 }
 
 #ifndef IGL_STATIC_LIBRARY

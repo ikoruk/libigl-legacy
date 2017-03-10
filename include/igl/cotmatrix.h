@@ -29,7 +29,8 @@ namespace igl
   //     MatrixXd)
   //   DerivedF  derived type of eigen matrix for F (e.g. derived from
   //     MatrixXi)
-  //   Scalar  scalar type for eigen sparse matrix (e.g. double)
+  //   SparseDerivedL  derived type for eigen sparse matrix (e.g. derived
+  //     from SparseMatrixd)
   // Inputs:
   //   V  #V by dim list of mesh vertex positions
   //   F  #F by simplex_size list of mesh faces (must be triangles)

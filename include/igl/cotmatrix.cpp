@@ -23,6 +23,7 @@ IGL_INLINE void igl::cotmatrix(
 {
   using namespace Eigen;
   using namespace std;
+  typedef typename SparseDerivedL::Scalar Scalar;
 
   L.resize(V.rows(),V.rows());
   Matrix<int,Dynamic,2> edges;
@@ -56,7 +57,6 @@ IGL_INLINE void igl::cotmatrix(
     return;
   }
   // Gather cotangents
-  typedef typename SparseDerivedL::Scalar Scalar;
   Matrix<Scalar,Dynamic,Dynamic> C;
   cotmatrix_entries(V,F,C);
   

@@ -18,8 +18,9 @@ namespace igl
   //   res  3-long list of number of vertices along the x y and z dimensions
   // Outputs:
   //   GV  res(0)*res(1)*res(2) by 3 list of mesh vertex positions.
-  //   
-  IGL_INLINE void grid(const Eigen::RowVector3i & res, Eigen::MatrixXd & GV);
+  //
+  template <typename DerivedGV>
+  IGL_INLINE void grid(const Eigen::RowVector3i & res, DerivedGV & GV);
 }
 #ifndef IGL_STATIC_LIBRARY
 #  include "grid.cpp"

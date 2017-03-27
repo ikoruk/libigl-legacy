@@ -15,8 +15,8 @@ template <
   typename DerivedI,
   typename DerivedC>
 IGL_INLINE void igl::point_mesh_squared_distance(
-  const Eigen::MatrixBase<DerivedP> & P,
-  const Eigen::MatrixBase<DerivedV> & V,
+  const Eigen::DenseBase<DerivedP> & P,
+  const Eigen::DenseBase<DerivedV> & V,
   const Eigen::MatrixXi & Ele,
   DerivedsqrD & sqrD,
   DerivedI & I,
@@ -52,8 +52,8 @@ template <
   typename DerivedI,
   typename DerivedC>
 IGL_INLINE void igl::point_mesh_squared_distance2(
-  const Eigen::MatrixBase<DerivedP> & P,
-  const Eigen::MatrixBase<DerivedV> & V,
+  const Eigen::DenseBase<DerivedP> & P,
+  const Eigen::DenseBase<DerivedV> & V,
   const Eigen::MatrixXi & Ele,
   DerivedsqrD & sqrD,
   DerivedI & I,
@@ -74,8 +74,8 @@ template <
   typename DerivedI,
   typename DerivedC>
 IGL_INLINE void igl::point_mesh_squared_distance3(
-  const Eigen::MatrixBase<DerivedP> & P,
-  const Eigen::MatrixBase<DerivedV> & V,
+  const Eigen::DenseBase<DerivedP> & P,
+  const Eigen::DenseBase<DerivedV> & V,
   const Eigen::MatrixXi & Ele,
   DerivedsqrD & sqrD,
   DerivedI & I,

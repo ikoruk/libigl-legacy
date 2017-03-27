@@ -31,8 +31,8 @@ namespace igl
     typename Derivedc>
   IGL_INLINE void point_simplex_squared_distance(
     const Eigen::MatrixBase<Derivedp> & p,
-    const Eigen::MatrixBase<DerivedV> & V,
-    const Eigen::MatrixBase<DerivedEle> & Ele,
+    const Eigen::DenseBase<DerivedV> & V,
+    const Eigen::DenseBase<DerivedEle> & Ele,
     const typename DerivedEle::Index i,
     Derivedsqr_d & sqr_d,
     Eigen::MatrixBase<Derivedc> & c);
@@ -59,8 +59,8 @@ namespace igl
     typename Derivedb>
   IGL_INLINE void point_simplex_squared_distance(
     const Eigen::MatrixBase<Derivedp> & p,
-    const Eigen::MatrixBase<DerivedV> & V,
-    const Eigen::MatrixBase<DerivedEle> & Ele,
+    const Eigen::DenseBase<DerivedV> & V,
+    const Eigen::DenseBase<DerivedEle> & Ele,
     const typename DerivedEle::Index i,
     Derivedsqr_d & sqr_d,
     Eigen::MatrixBase<Derivedc> & c,

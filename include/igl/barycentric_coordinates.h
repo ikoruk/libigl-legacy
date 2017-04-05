@@ -53,10 +53,10 @@ namespace igl
     typename DerivedC,
     typename DerivedL>
   IGL_INLINE void barycentric_coordinates(
-    const Eigen::DenseBase<DerivedP> & P,
-    const Eigen::DenseBase<DerivedA> & A,
-    const Eigen::DenseBase<DerivedB> & B,
-    const Eigen::DenseBase<DerivedC> & C,
+    const Eigen::MatrixBase<DerivedP> & P,
+    const Eigen::MatrixBase<DerivedA> & A,
+    const Eigen::MatrixBase<DerivedB> & B,
+    const Eigen::MatrixBase<DerivedC> & C,
     Eigen::PlainObjectBase<DerivedL> & L);
 
 }

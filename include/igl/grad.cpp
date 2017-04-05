@@ -14,8 +14,8 @@
 #include "doublearea.h"
 
 template <typename DerivedV, typename DerivedF, typename SparseDerivedG>
-IGL_INLINE void grad_tet(const Eigen::PlainObjectBase<DerivedV>&V,
-                         const Eigen::PlainObjectBase<DerivedF>&T,
+IGL_INLINE void grad_tet(const Eigen::MatrixBase<DerivedV>&V,
+                         const Eigen::MatrixBase<DerivedF>&T,
                          SparseDerivedG &G,
                          bool uniform) {
   using namespace Eigen;
@@ -114,8 +114,8 @@ IGL_INLINE void grad_tet(const Eigen::PlainObjectBase<DerivedV>&V,
 }
 
 template <typename DerivedV, typename DerivedF, typename SparseDerivedG>
-IGL_INLINE void grad_tri(const Eigen::PlainObjectBase<DerivedV>&V,
-                         const Eigen::PlainObjectBase<DerivedF>&F,
+IGL_INLINE void grad_tri(const Eigen::MatrixBase<DerivedV>&V,
+                         const Eigen::MatrixBase<DerivedF>&F,
                          SparseDerivedG &G,
                          bool uniform)
 {
@@ -130,9 +130,9 @@ IGL_INLINE void grad_tri(const Eigen::PlainObjectBase<DerivedV>&V,
     int i3 = F(i,2);
 
     // #F x 3 matrices of triangle edge vectors, named after opposite vertices
-    Eigen::Matrix<typename DerivedV::Scalar, 1, 3> v32 = V.row(i3) - V.row(i2);
-    Eigen::Matrix<typename DerivedV::Scalar, 1, 3> v13 = V.row(i1) - V.row(i3);
-    Eigen::Matrix<typename DerivedV::Scalar, 1, 3> v21 = V.row(i2) - V.row(i1);
+    Eigen::Matrix<typename DerivedV::Scalar, 1, 3> v32; v32 << V.row(i3) - V.row(i2);
+    Eigen::Matrix<typename DerivedV::Scalar, 1, 3> v13; v13 << V.row(i1) - V.row(i3);
+    Eigen::Matrix<typename DerivedV::Scalar, 1, 3> v21; v21 << V.row(i2) - V.row(i1);
     Eigen::Matrix<typename DerivedV::Scalar, 1, 3> n = v32.cross(v13);
     // area of parallelogram is twice area of triangle
     // area of parallelogram is || v1 x v2 ||
@@ -222,8 +222,8 @@ IGL_INLINE void grad_tri(const Eigen::PlainObjectBase<DerivedV>&V,
 }
 
 template <typename DerivedV, typename DerivedF, typename SparseDerivedG>
-IGL_INLINE void igl::grad(const Eigen::PlainObjectBase<DerivedV>&V,
-                          const Eigen::PlainObjectBase<DerivedF>&F,
+IGL_INLINE void igl::grad(const Eigen::MatrixBase<DerivedV>&V,
+                          const Eigen::MatrixBase<DerivedF>&F,
                           SparseDerivedG &G,
                           bool uniform)
 {

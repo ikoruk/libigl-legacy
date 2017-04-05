@@ -7,8 +7,7 @@
 // obtain one at http://mozilla.org/MPL/2.0/.
 #include "grid.h"
 
-template <typename DerivedGV>
-IGL_INLINE void igl::grid(const Eigen::RowVector3i & res, DerivedGV & GV)
+IGL_INLINE void igl::grid(const Eigen::RowVector3i & res, Eigen::MatrixXd & GV)
 {
   using namespace Eigen;
   GV.resize(res(0)*res(1)*res(2),3);
@@ -23,12 +22,7 @@ IGL_INLINE void igl::grid(const Eigen::RowVector3i & res, DerivedGV & GV)
       for(int xi = 0;xi<res(0);xi++)
       {
         const double x = lerp(xi,0);
-        if (GV.cols() >= 3)
-          GV.row(xi+res(0)*(yi + res(1)*zi)) << x, y, z;
-        else if (GV.cols() == 2)
-          GV.row(xi+res(0)*(yi + res(1)*zi)) << x, y;
-        else if (GV.cols() == 1)
-          GV.row(xi+res(0)*(yi + res(1)*zi)) << x;
+        GV.row(xi+res(0)*(yi + res(1)*zi)) = RowVector3d(x,y,z);
       }
     }
   }

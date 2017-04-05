@@ -20,7 +20,7 @@ template <typename DerivedV, typename DerivedF, typename DerivedC>
 IGL_INLINE void igl::cotmatrix_entries(
   const Eigen::MatrixBase<DerivedV>& V,
   const Eigen::MatrixBase<DerivedF>& F,
-  DerivedC& C)
+  Eigen::PlainObjectBase<DerivedC>& C)
 {
   using namespace std;
   using namespace Eigen;

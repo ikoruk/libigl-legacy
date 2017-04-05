@@ -37,12 +37,12 @@ namespace igl
     typename DerivedI,
     typename DerivedC>
   IGL_INLINE void point_mesh_squared_distance(
-    const Eigen::DenseBase<DerivedP> & P,
-    const Eigen::DenseBase<DerivedV> & V,
+    const Eigen::MatrixBase<DerivedP> & P,
+    const Eigen::MatrixBase<DerivedV> & V,
     const Eigen::MatrixXi & Ele, 
-    DerivedsqrD & sqrD,
-    DerivedI & I,
-    DerivedC & C);
+    Eigen::PlainObjectBase<DerivedsqrD> & sqrD,
+    Eigen::PlainObjectBase<DerivedI> & I,
+    Eigen::PlainObjectBase<DerivedC> & C);
 
   // force 2d for compilation
   template <
@@ -52,12 +52,12 @@ namespace igl
     typename DerivedI,
     typename DerivedC>
   IGL_INLINE void point_mesh_squared_distance2(
-    const Eigen::DenseBase<DerivedP> & P,
-    const Eigen::DenseBase<DerivedV> & V,
+    const Eigen::MatrixBase<DerivedP> & P,
+    const Eigen::MatrixBase<DerivedV> & V,
     const Eigen::MatrixXi & Ele,
-    DerivedsqrD & sqrD,
-    DerivedI & I,
-    DerivedC & C);
+    Eigen::PlainObjectBase<DerivedsqrD> & sqrD,
+    Eigen::PlainObjectBase<DerivedI> & I,
+    Eigen::PlainObjectBase<DerivedC> & C);
 
   // force 3d for compilation
   template <
@@ -67,12 +67,12 @@ namespace igl
     typename DerivedI,
     typename DerivedC>
   IGL_INLINE void point_mesh_squared_distance3(
-    const Eigen::DenseBase<DerivedP> & P,
-    const Eigen::DenseBase<DerivedV> & V,
+    const Eigen::MatrixBase<DerivedP> & P,
+    const Eigen::MatrixBase<DerivedV> & V,
     const Eigen::MatrixXi & Ele,
-    DerivedsqrD & sqrD,
-    DerivedI & I,
-    DerivedC & C);
+    Eigen::PlainObjectBase<DerivedsqrD> & sqrD,
+    Eigen::PlainObjectBase<DerivedI> & I,
+    Eigen::PlainObjectBase<DerivedC> & C);
 }
 
 #ifndef IGL_STATIC_LIBRARY

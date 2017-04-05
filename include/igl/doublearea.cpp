@@ -17,7 +17,7 @@ template <typename DerivedV, typename DerivedF, typename DeriveddblA>
 IGL_INLINE void igl::doublearea(
   const Eigen::MatrixBase<DerivedV> & V,
   const Eigen::MatrixBase<DerivedF> & F,
-  DeriveddblA & dblA)
+  Eigen::PlainObjectBase<DeriveddblA> & dblA)
 {
   // quads are handled by a specialized function
   if (F.cols() == 4) return doublearea_quad(V,F,dblA);
@@ -131,7 +131,7 @@ IGL_INLINE typename DerivedA::Scalar igl::doublearea_single(
 template <typename Derivedl, typename DeriveddblA>
 IGL_INLINE void igl::doublearea(
   const Eigen::MatrixBase<Derivedl> & ul,
-  DeriveddblA & dblA)
+  Eigen::PlainObjectBase<DeriveddblA> & dblA)
 {
   // Default is to leave NaNs and fire asserts in debug mode
   return doublearea(
@@ -142,7 +142,7 @@ template <typename Derivedl, typename DeriveddblA>
 IGL_INLINE void igl::doublearea(
   const Eigen::MatrixBase<Derivedl> & ul,
   const typename Derivedl::Scalar nan_replacement,
-  DeriveddblA & dblA)
+  Eigen::PlainObjectBase<DeriveddblA> & dblA)
 {
   using namespace Eigen;
   using namespace std;
@@ -200,7 +200,7 @@ template <typename DerivedV, typename DerivedF, typename DeriveddblA>
 IGL_INLINE void igl::doublearea_quad(
   const Eigen::MatrixBase<DerivedV> & V,
   const Eigen::MatrixBase<DerivedF> & F,
-  DeriveddblA & dblA)
+  Eigen::PlainObjectBase<DeriveddblA> & dblA)
 {
   assert(V.cols() == 3); // Only supports points in 3D
   assert(F.cols() == 4); // Only support quads

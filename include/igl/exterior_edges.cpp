@@ -41,25 +41,20 @@
 //  return c.i == p.second;
 //}
 
-template <
-  typename DerivedF,
-  typename DerivedE>
 IGL_INLINE void igl::exterior_edges(
-  const Eigen::PlainObjectBase<DerivedF> & F,
-  DerivedE & E)
+  const Eigen::MatrixXi & F,
+  Eigen::MatrixXi & E)
 {
   using namespace Eigen;
   using namespace std;
-  typedef typename DerivedF::Scalar Index;
-  typedef Eigen::Matrix<Index, Eigen::Dynamic, 1> VectorXi;
   assert(F.cols() == 3);
   const size_t m = F.rows();
-  DerivedE all_E,sall_E,sort_order;
+  MatrixXi all_E,sall_E,sort_order;
   // Sort each edge by index
   oriented_facets(F,all_E);
   sort(all_E,2,true,sall_E,sort_order);
   // Find unique edges
-  DerivedE uE;
+  MatrixXi uE;
   VectorXi IA,EMAP;
   unique_rows(sall_E,uE,IA,EMAP);
   VectorXi counts = VectorXi::Zero(uE.rows());
@@ -102,13 +97,10 @@ IGL_INLINE void igl::exterior_edges(
   }
 }
 
-template <
-  typename DerivedF,
-  typename DerivedE>
-IGL_INLINE DerivedE igl::exterior_edges( const Eigen::PlainObjectBase<DerivedF> & F)
+IGL_INLINE Eigen::MatrixXi igl::exterior_edges( const Eigen::MatrixXi & F)
 {
   using namespace Eigen;
-  DerivedE E;
+  MatrixXi E;
   exterior_edges(F,E);
   return E;
 }

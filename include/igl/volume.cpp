@@ -23,10 +23,10 @@ IGL_INLINE void igl::volume(
   for(int t = 0;t<m;t++)
   {
     typedef Eigen::Matrix<typename DerivedV::Scalar,1,3> RowVector3S;
-    const RowVector3S & a = V.row(T(t,0));
-    const RowVector3S & b = V.row(T(t,1));
-    const RowVector3S & c = V.row(T(t,2));
-    const RowVector3S & d = V.row(T(t,3));
+    RowVector3S a; a << V.row(T(t,0));
+    RowVector3S b; b << V.row(T(t,1));
+    RowVector3S c; c << V.row(T(t,2));
+    RowVector3S d; d << V.row(T(t,3));
     vol(t) = -(a-d).dot((b-d).cross(c-d))/6.;
   }
 }

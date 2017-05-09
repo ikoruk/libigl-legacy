@@ -29,7 +29,8 @@ namespace igl
   //     MatrixXd)
   //   DerivedF  derived type of eigen matrix for F (e.g. derived from
   //     MatrixXi)
-  //   Scalar  scalar type for eigen sparse matrix (e.g. double)
+  //   SparseDerivedL  derived type for eigen sparse matrix (e.g. derived
+  //     from SparseMatrixd)
   // Inputs:
   //   V  #V by dim list of mesh vertex positions
   //   F  #F by simplex_size list of mesh faces (must be triangles)
@@ -43,11 +44,11 @@ namespace igl
   // therefore in general negative and the matrix is **negative** semi-definite
   // (immediately, -L is **positive** semi-definite)
   //
-  template <typename DerivedV, typename DerivedF, typename Scalar>
+  template <typename DerivedV, typename DerivedF, typename SparseDerivedL>
   IGL_INLINE void cotmatrix(
-    const Eigen::MatrixBase<DerivedV> & V, 
-    const Eigen::MatrixBase<DerivedF> & F, 
-    Eigen::SparseMatrix<Scalar>& L);
+    const Eigen::MatrixBase<DerivedV>& V,
+    const Eigen::MatrixBase<DerivedF>& F,
+    SparseDerivedL& L);
 }
 
 #ifndef IGL_STATIC_LIBRARY

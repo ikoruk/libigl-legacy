@@ -22,7 +22,7 @@ namespace igl
   //     ith element
   //   ValueVector  list of values, value should be expect to be cast to type
   //     T. Must implement operator(i) to retrieve ith element
-  //   T  should be a eigen sparse matrix primitive type like int or double
+  //   SparseT  should be a eigen sparse matrix
   // Input:
   //   I  nnz vector of row indices of non zeros entries in X
   //   J  nnz vector of column indices of non zeros entries in X
@@ -33,24 +33,24 @@ namespace igl
   // Outputs:
   //   X  m by n matrix of type T whose entries are to be found 
   //
-  template <class IndexVector, class ValueVector, typename T>
+  template <class IndexVector, class ValueVector, typename SparseT>
   IGL_INLINE void sparse(
     const IndexVector & I,
     const IndexVector & J,
     const ValueVector & V,
-    Eigen::SparseMatrix<T>& X);
+    SparseT& X);
   template <
     class IndexVectorI, 
     class IndexVectorJ, 
     class ValueVector, 
-    typename T>
+    typename SparseT>
   IGL_INLINE void sparse(
     const IndexVectorI & I,
     const IndexVectorJ & J,
     const ValueVector & V,
     const size_t m,
     const size_t n,
-    Eigen::SparseMatrix<T>& X);
+    SparseT& X);
   // THIS MAY BE SUPERSEDED BY EIGEN'S .sparseView Indeed it is.
   // Convert a full, dense matrix to a sparse one
   //
@@ -60,10 +60,10 @@ namespace igl
   //   D  m by n full, dense matrix
   // Output:
   //   X  m by n sparse matrix
-  template <typename DerivedD, typename T>
+  template <typename DerivedD, typename SparseT>
   IGL_INLINE void sparse(
     const Eigen::PlainObjectBase<DerivedD>& D,
-    Eigen::SparseMatrix<T>& X);
+    SparseT& X);
   // Wrapper with return
   template <typename DerivedD>
   IGL_INLINE Eigen::SparseMatrix<typename DerivedD::Scalar > sparse(

@@ -34,16 +34,16 @@ namespace igl
   //
   template <typename DerivedA,typename DerivedB>
   IGL_INLINE void repmat(
-    const Eigen::MatrixBase<DerivedA> & A,
+    const Eigen::DenseBase<DerivedA> & A,
     const int r,
     const int c,
-    Eigen::PlainObjectBase<DerivedB> & B);
-  template <typename T>
+    Eigen::DenseBase<DerivedB> & B);
+  template <typename SparseDerivedA, typename SparseDerivedB>
   IGL_INLINE void repmat(
-    const Eigen::SparseMatrix<T> & A,
+    const Eigen::SparseMatrixBase<SparseDerivedA> & A,
     const int r,
     const int c,
-    Eigen::SparseMatrix<T> & B);
+    Eigen::SparseMatrixBase<SparseDerivedB> & B);
 }
 
 #ifndef IGL_STATIC_LIBRARY

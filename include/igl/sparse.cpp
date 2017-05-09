@@ -10,12 +10,12 @@
 #include <iostream>
 #include <vector>
 
-template <class IndexVector, class ValueVector, typename T>
+template <class IndexVector, class ValueVector, typename SparseT>
 IGL_INLINE void igl::sparse(
   const IndexVector & I,
   const IndexVector & J,
   const ValueVector & V,
-  Eigen::SparseMatrix<T>& X)
+  SparseT& X)
 {
   size_t m = (size_t)I.maxCoeff()+1;
   size_t n = (size_t)J.maxCoeff()+1;
@@ -27,14 +27,14 @@ template <
   class IndexVectorI,
   class IndexVectorJ,
   class ValueVector,
-  typename T>
+  typename SparseT>
 IGL_INLINE void igl::sparse(
   const IndexVectorI & I,
   const IndexVectorJ & J,
   const ValueVector & V,
   const size_t m,
   const size_t n,
-  Eigen::SparseMatrix<T>& X)
+  SparseT& X)
 {
   using namespace std;
   using namespace Eigen;
@@ -60,25 +60,25 @@ IGL_INLINE void igl::sparse(
   //  dyn_X.coeffRef((int)I(i),(int)J(i)) += (T)V(i);
   //}
   //X = Eigen::SparseMatrix<T>(dyn_X);
-  vector<Triplet<T> > IJV;
+  vector<Triplet<typename SparseT::Scalar> > IJV;
   IJV.reserve(I.size());
   for(int x = 0;x<I.size();x++)
   {
-    IJV.push_back(Triplet<T >(I(x),J(x),V(x)));
+    IJV.push_back(Triplet<typename SparseT::Scalar>(I(x),J(x),V(x)));
   }
   X.resize(m,n);
   X.setFromTriplets(IJV.begin(),IJV.end());
 }
 
-template <typename DerivedD, typename T>
+template <typename DerivedD, typename SparseT>
 IGL_INLINE void igl::sparse(
   const Eigen::PlainObjectBase<DerivedD>& D,
-  Eigen::SparseMatrix<T>& X)
+  SparseT& X)
 {
   assert(false && "Obsolete. Just call D.sparseView() directly");
   using namespace std;
   using namespace Eigen;
-  vector<Triplet<T> > DIJV;
+  vector<Triplet<typename SparseT::Scalar> > DIJV;
   const int m = D.rows();
   const int n = D.cols();
   for(int i = 0;i<m;i++)
@@ -87,7 +87,7 @@ IGL_INLINE void igl::sparse(
     {
       if(D(i,j)!=0)
       {
-        DIJV.push_back(Triplet<T>(i,j,D(i,j)));
+        DIJV.push_back(Triplet<typename SparseT::Scalar>(i,j,D(i,j)));
       }
     }
   }

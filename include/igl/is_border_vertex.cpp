@@ -31,6 +31,26 @@ IGL_INLINE std::vector<bool> igl::is_border_vertex(
   return ret;
 }
 
+template <typename DerivedV, typename DerivedF, typename DerivedVMAP>
+IGL_INLINE void igl::is_border_vertex(
+    const Eigen::PlainObjectBase<DerivedV> &V,
+    const Eigen::PlainObjectBase<DerivedF> &F,
+    Eigen::PlainObjectBase<DerivedVMAP> &Vmap)
+{
+  Eigen::PlainObjectBase<DerivedF> FF;
+  igl::triangle_triangle_adjacency(F,FF);
+  Vmap.resize(V.rows(),1);
+  Vmap = DerivedVMAP::Zero(V.rows(),1);
+  
+  for(unsigned i=0; i<F.rows();++i)
+    for(unsigned j=0;j<F.cols();++j)
+      if(FF(i,j) == -1)
+      {
+        Vmap[F(i,j)]              = 1;
+        Vmap[F(i,(j+1)%F.cols())] = 1;
+      }
+}
+
 #ifdef IGL_STATIC_LIBRARY
 // Explicit template instantiation
 template std::vector<bool, std::allocator<bool> > igl::is_border_vertex<Eigen::Matrix<double, -1, 3, 0, -1, 3>, Eigen::Matrix<int, -1, 3, 0, -1, 3> >(Eigen::PlainObjectBase<Eigen::Matrix<double, -1, 3, 0, -1, 3> > const&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, 3, 0, -1, 3> > const&);

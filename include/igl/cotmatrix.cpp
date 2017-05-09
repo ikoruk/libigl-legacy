@@ -15,14 +15,15 @@
 // Bug in unsupported/Eigen/SparseExtra needs iostream first
 #include <iostream>
 
-template <typename DerivedV, typename DerivedF, typename Scalar>
+template <typename DerivedV, typename DerivedF, typename SparseDerivedL>
 IGL_INLINE void igl::cotmatrix(
   const Eigen::MatrixBase<DerivedV> & V, 
   const Eigen::MatrixBase<DerivedF> & F, 
-  Eigen::SparseMatrix<Scalar>& L)
+  SparseDerivedL& L)
 {
   using namespace Eigen;
   using namespace std;
+  typedef typename SparseDerivedL::Scalar Scalar;
 
   L.resize(V.rows(),V.rows());
   Matrix<int,Dynamic,2> edges;

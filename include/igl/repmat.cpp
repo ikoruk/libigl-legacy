@@ -9,10 +9,10 @@
 
 template <typename DerivedA, typename DerivedB>
 IGL_INLINE void igl::repmat(
-  const Eigen::MatrixBase<DerivedA> & A,
+  const Eigen::DenseBase<DerivedA> & A,
   const int r,
   const int c,
-  Eigen::PlainObjectBase<DerivedB> & B)
+  Eigen::DenseBase<DerivedB> & B)
 {
   assert(r>0);
   assert(c>0);
@@ -29,12 +29,12 @@ IGL_INLINE void igl::repmat(
   }
 }
 
-template <typename T>
+template <typename SparseDerivedA, typename SparseDerivedB>
 IGL_INLINE void igl::repmat(
-  const Eigen::SparseMatrix<T> & A,
+  const Eigen::SparseMatrixBase<SparseDerivedA> & A,
   const int r,
   const int c,
-  Eigen::SparseMatrix<T> & B)
+  Eigen::SparseMatrixBase<SparseDerivedB> & B)
 {
   assert(r>0);
   assert(c>0);
@@ -48,7 +48,7 @@ IGL_INLINE void igl::repmat(
       for (int k=0; k<A.outerSize(); ++k)
       {
         // loop inner level
-        for (typename Eigen::SparseMatrix<T>::InnerIterator it(A,k); it; ++it)
+        for (typename Eigen::SparseMatrixBase<SparseDerivedA>::InnerIterator it(A,k); it; ++it)
         {
           B.insert(i*A.rows()+it.row(),j*A.cols() + it.col()) = it.value();
         }

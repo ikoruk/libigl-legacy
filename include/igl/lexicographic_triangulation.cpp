@@ -19,7 +19,7 @@ template<
   typename DerivedF
   >
 IGL_INLINE void igl::lexicographic_triangulation(
-    const Eigen::PlainObjectBase<DerivedP>& P,
+    const Eigen::DenseBase<DerivedP>& P,
     Orient2D orient2D,
     Eigen::PlainObjectBase<DerivedF>& F)
 {

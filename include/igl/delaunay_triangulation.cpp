@@ -20,7 +20,7 @@ template<
   typename InCircle,
   typename DerivedF>
 IGL_INLINE void igl::delaunay_triangulation(
-    const Eigen::PlainObjectBase<DerivedV>& V,
+    const Eigen::DenseBase<DerivedV>& V,
     Orient2D orient2D,
     InCircle incircle,
     Eigen::PlainObjectBase<DerivedF>& F)

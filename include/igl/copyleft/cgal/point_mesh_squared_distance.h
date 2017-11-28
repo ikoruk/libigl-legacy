@@ -42,9 +42,9 @@ namespace igl
         typename DerivedI,
         typename DerivedC>
       IGL_INLINE void point_mesh_squared_distance(
-        const Eigen::PlainObjectBase<DerivedP> & P,
-        const Eigen::PlainObjectBase<DerivedV> & V,
-        const Eigen::PlainObjectBase<DerivedF> & F,
+        const Eigen::MatrixBase<DerivedP> & P,
+        const Eigen::MatrixBase<DerivedV> & V,
+        const Eigen::MatrixBase<DerivedF> & F,
               Eigen::PlainObjectBase<DerivedsqrD> & sqrD,
               Eigen::PlainObjectBase<DerivedI> & I,
               Eigen::PlainObjectBase<DerivedC> & C);
@@ -60,8 +60,8 @@ namespace igl
         typename DerivedF
         >
       IGL_INLINE void point_mesh_squared_distance_precompute(
-        const Eigen::PlainObjectBase<DerivedV> & V,
-        const Eigen::PlainObjectBase<DerivedF> & F,
+        const Eigen::MatrixBase<DerivedV> & V,
+        const Eigen::MatrixBase<DerivedF> & F,
         CGAL::AABB_tree<
           CGAL::AABB_traits<Kernel, 
             CGAL::AABB_triangle_primitive<Kernel, 
@@ -81,7 +81,7 @@ namespace igl
         typename DerivedI,
         typename DerivedC>
       IGL_INLINE void point_mesh_squared_distance(
-        const Eigen::PlainObjectBase<DerivedP> & P,
+        const Eigen::MatrixBase<DerivedP> & P,
         const CGAL::AABB_tree<
           CGAL::AABB_traits<Kernel, 
             CGAL::AABB_triangle_primitive<Kernel, 

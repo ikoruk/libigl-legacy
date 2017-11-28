@@ -8,8 +8,8 @@
 #ifndef IGL_COPYLEFT_CGAL_ASSIGN_SCALAR_H
 #define IGL_COPYLEFT_CGAL_ASSIGN_SCALAR_H
 #include "../../igl_inline.h"
-#include <CGAL/Exact_predicates_exact_constructions_kernel.h>
-#include <CGAL/Exact_predicates_exact_constructions_kernel_with_sqrt.h>
+//#include <CGAL/Exact_predicates_exact_constructions_kernel.h>
+//#include <CGAL/Exact_predicates_exact_constructions_kernel_with_sqrt.h>
 namespace igl
 {
   namespace copyleft
@@ -20,15 +20,15 @@ namespace igl
       //   cgal  cgal scalar
       // Outputs:
       //   d  output scalar
-      IGL_INLINE void assign_scalar(
-        const CGAL::Epeck::FT & cgal,
-        CGAL::Epeck::FT & d);
-      IGL_INLINE void assign_scalar(
-        const CGAL::Epeck::FT & cgal,
-        double & d);
-      IGL_INLINE void assign_scalar(
-        const CGAL::Epeck::FT & cgal,
-        float& d);
+//      IGL_INLINE void assign_scalar(
+//        const CGAL::Epeck::FT & cgal,
+//        CGAL::Epeck::FT & d);
+//      IGL_INLINE void assign_scalar(
+//        const CGAL::Epeck::FT & cgal,
+//        double & d);
+//      IGL_INLINE void assign_scalar(
+//        const CGAL::Epeck::FT & cgal,
+//        float& d);
       IGL_INLINE void assign_scalar(
         const double & c,
         double & d);
@@ -38,15 +38,15 @@ namespace igl
       IGL_INLINE void assign_scalar(
         const float& c,
         double& d);
-      IGL_INLINE void assign_scalar(
-        const CGAL::Exact_predicates_exact_constructions_kernel_with_sqrt::FT & cgal,
-        CGAL::Exact_predicates_exact_constructions_kernel_with_sqrt::FT & d);
-      IGL_INLINE void assign_scalar(
-        const CGAL::Exact_predicates_exact_constructions_kernel_with_sqrt::FT & cgal,
-        double & d);
-      IGL_INLINE void assign_scalar(
-        const CGAL::Exact_predicates_exact_constructions_kernel_with_sqrt::FT & cgal,
-        float& d);
+//      IGL_INLINE void assign_scalar(
+//        const CGAL::Exact_predicates_exact_constructions_kernel_with_sqrt::FT & cgal,
+//        CGAL::Exact_predicates_exact_constructions_kernel_with_sqrt::FT & d);
+//      IGL_INLINE void assign_scalar(
+//        const CGAL::Exact_predicates_exact_constructions_kernel_with_sqrt::FT & cgal,
+//        double & d);
+//      IGL_INLINE void assign_scalar(
+//        const CGAL::Exact_predicates_exact_constructions_kernel_with_sqrt::FT & cgal,
+//        float& d);
     }
   }
 }

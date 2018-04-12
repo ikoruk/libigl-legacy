@@ -40,7 +40,8 @@ namespace igl
   inline bool parallel_for(
     const Index loop_size, 
     const FunctionType & func,
-    const size_t min_parallel=0);
+    const size_t min_parallel=0,
+    const size_t num_threads=0);
   // PARALLEL_FOR Functional implementation of an open-mp style, parallel for
   // loop with accumulation. For example, serial code separated into n chunks
   // (each to be parallelized with a thread) might look like:
@@ -84,7 +85,8 @@ namespace igl
     const PrepFunctionType & prep_func,
     const FunctionType & func,
     const AccumFunctionType & accum_func,
-    const size_t min_parallel=0);
+    const size_t min_parallel=0,
+    const size_t num_threads=0);
 }
 
 // Implementation
@@ -99,14 +101,59 @@ template<typename Index, typename FunctionType >
 inline bool igl::parallel_for(
   const Index loop_size, 
   const FunctionType & func,
-  const size_t min_parallel)
+  const size_t min_parallel,
+  const size_t num_threads)
 {
-  using namespace std;
-  // no op preparation/accumulation
-  const auto & no_op = [](const size_t /*n/t*/){};
-  // two-parameter wrapper ignoring thread id
-  const auto & wrapper = [&func](Index i,size_t /*t*/){ func(i); };
-  return parallel_for(loop_size,no_op,wrapper,no_op,min_parallel);
+  assert(loop_size>=0);
+  if(loop_size==0) return false;
+  // Estimate number of threads in the pool
+  // http://ideone.com/Z7zldb
+  const size_t sthc = num_threads == 0 ? std::thread::hardware_concurrency() : num_threads;
+  const size_t nthreads =
+#ifdef IGL_PARALLEL_FOR_FORCE_SERIAL
+    0;
+#else
+    loop_size<min_parallel?0:(sthc==0?8:sthc);
+#endif
+  if(nthreads==0)
+  {
+    // serial
+    for(Index i = 0;i<loop_size;i++) func(i);
+    return false;
+  }else
+  {
+    // Size of a slice for the range functions
+    Index slice =
+      std::max(
+        (Index)std::round((loop_size+1)/static_cast<double>(nthreads)),(Index)1);
+
+    // [Helper] Inner loop
+    const auto & range = [&func](const Index k1, const Index k2)
+    {
+      for(Index k = k1; k < k2; k++) func(k);
+    };
+    // Create pool and launch jobs
+    std::vector<std::thread> pool;
+    pool.reserve(nthreads);
+    // Inner range extents
+    Index i1 = 0;
+    Index i2 = std::min(0 + slice, loop_size);
+    {
+      for (size_t t = 0; t+1 < nthreads && i1 < loop_size; ++t)
+      {
+        pool.emplace_back(range, i1, i2);
+        i1 = i2;
+        i2 = std::min(i2 + slice, loop_size);
+      }
+      if (i1 < loop_size)
+      {
+        pool.emplace_back(range, i1, loop_size);
+      }
+    }
+    // Wait for jobs to finish
+    for (std::thread &t : pool) if (t.joinable()) t.join();
+    return true;
+  }
 }
 
 template<
@@ -119,13 +166,14 @@ inline bool igl::parallel_for(
   const PreFunctionType & prep_func,
   const FunctionType & func,
   const AccumFunctionType & accum_func,
-  const size_t min_parallel)
+  const size_t min_parallel,
+  const size_t num_threads)
 {
   assert(loop_size>=0);
   if(loop_size==0) return false;
   // Estimate number of threads in the pool
   // http://ideone.com/Z7zldb
-  const static size_t sthc = std::thread::hardware_concurrency();
+  const size_t sthc = num_threads == 0 ? std::thread::hardware_concurrency() : num_threads;
   const size_t nthreads = 
 #ifdef IGL_PARALLEL_FOR_FORCE_SERIAL
     0;

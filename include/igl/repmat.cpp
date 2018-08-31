@@ -12,7 +12,7 @@ IGL_INLINE void igl::repmat(
   const Eigen::MatrixBase<DerivedA> & A,
   const int r,
   const int c,
-  Eigen::PlainObjectBase<DerivedB> & B)
+  Eigen::DenseBase<DerivedB> & B)
 {
   assert(r>0);
   assert(c>0);

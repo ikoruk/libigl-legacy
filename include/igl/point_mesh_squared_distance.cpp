@@ -12,13 +12,14 @@
 template <
   typename DerivedP,
   typename DerivedV,
+  typename DerivedEle,
   typename DerivedsqrD,
   typename DerivedI,
   typename DerivedC>
 IGL_INLINE void igl::point_mesh_squared_distance(
-  const Eigen::PlainObjectBase<DerivedP> & P,
-  const Eigen::PlainObjectBase<DerivedV> & V,
-  const Eigen::MatrixXi & Ele,
+  const Eigen::MatrixBase<DerivedP> & P,
+  const Eigen::MatrixBase<DerivedV> & V,
+  const Eigen::MatrixBase<DerivedEle> & Ele,
   Eigen::PlainObjectBase<DerivedsqrD> & sqrD,
   Eigen::PlainObjectBase<DerivedI> & I,
   Eigen::PlainObjectBase<DerivedC> & C)
@@ -47,8 +48,55 @@ IGL_INLINE void igl::point_mesh_squared_distance(
   }
 }
 
+template <
+  typename DerivedP,
+  typename DerivedV,
+  typename DerivedEle,
+  typename DerivedsqrD,
+  typename DerivedI,
+  typename DerivedC>
+IGL_INLINE void igl::point_mesh_squared_distance2(
+  const Eigen::MatrixBase<DerivedP> & P,
+  const Eigen::MatrixBase<DerivedV> & V,
+  const Eigen::MatrixBase<DerivedEle> & Ele,
+  Eigen::PlainObjectBase<DerivedsqrD> & sqrD,
+  Eigen::PlainObjectBase<DerivedI> & I,
+  Eigen::PlainObjectBase<DerivedC> & C)
+{
+  using namespace std;
+  assert((P.cols() == 2) && "P.cols() should be 2");
+  assert(P.cols() == V.cols() && "P.cols() should equal V.cols()");
+  AABB<DerivedV,2> tree;
+  tree.init(V,Ele);
+  return tree.squared_distance(V,Ele,P,sqrD,I,C);
+}
+
+template <
+  typename DerivedP,
+  typename DerivedV,
+  typename DerivedEle,
+  typename DerivedsqrD,
+  typename DerivedI,
+  typename DerivedC>
+IGL_INLINE void igl::point_mesh_squared_distance3(
+  const Eigen::MatrixBase<DerivedP> & P,
+  const Eigen::MatrixBase<DerivedV> & V,
+  const Eigen::MatrixBase<DerivedEle> & Ele,
+  Eigen::PlainObjectBase<DerivedsqrD> & sqrD,
+  Eigen::PlainObjectBase<DerivedI> & I,
+  Eigen::PlainObjectBase<DerivedC> & C)
+{
+  using namespace std;
+  assert((P.cols() == 3) && "P.cols() should be 3");
+  assert(P.cols() == V.cols() && "P.cols() should equal V.cols()");
+  AABB<DerivedV,3> tree;
+  tree.init(V,Ele);
+  return tree.squared_distance(V,Ele,P,sqrD,I,C);
+}
+
 #ifdef IGL_STATIC_LIBRARY
 template void igl::point_mesh_squared_distance<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<double, -1, -1, 0, -1, -1> >(Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, Eigen::Matrix<int, -1, -1, 0, -1, -1> const&, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >&);
 template void igl::point_mesh_squared_distance<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<double, -1, 1, 0, -1, 1>, Eigen::Matrix<int, -1, 1, 0, -1, 1>, Eigen::Matrix<double, -1, -1, 0, -1, -1> >(Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, Eigen::Matrix<int, -1, -1, 0, -1, -1> const&, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, 1, 0, -1, 1> >&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> >&, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >&);
 template void igl::point_mesh_squared_distance<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<double, -1, 1, 0, -1, 1>, Eigen::Matrix<long, -1, 1, 0, -1, 1>, Eigen::Matrix<double, -1, 3, 0, -1, 3> >(Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, Eigen::Matrix<int, -1, -1, 0, -1, -1> const&, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, 1, 0, -1, 1> >&, Eigen::PlainObjectBase<Eigen::Matrix<long, -1, 1, 0, -1, 1> >&, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, 3, 0, -1, 3> >&);
 #endif
+
